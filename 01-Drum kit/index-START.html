@@ -62,8 +62,8 @@
   var Audios = document.querySelectorAll('audio');
 
   Keys.forEach(key=>{
-      key.addEventListener('transitionend', ()=>{
-        key.classList.remove("playing");
+      key.addEventListener('transitionend', function(){
+        this.classList.remove("playing");
       })
       })
 
