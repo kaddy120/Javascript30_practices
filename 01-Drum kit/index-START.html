@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--<meta charset="UTF-8">-->
-  <meta charset = "UTF-8">
+  <meta charset="UTF-8">
   <title>JS Drum Kit</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -59,34 +58,31 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  var Keys = document.querySelectorAll('.key');
+  var Audios = document.querySelectorAll('audio');
 
-  window.addEventListener('keyup', event => {
-     const Audio = document.querySelector(`audio[data-key = "${event.keyCode}"]`);
-     //console.log(event);
-     Audio.currentTime = 0;
-     var key = document.querySelector(`div[data-key = "${event.keyCode}"]`);
-     console.log(key);
-     key.classList.add("playing")
-     Audio.play();
+  Keys.forEach(key=>{
+      key.addEventListener('transitionend', ()=>{
+        key.classList.remove("playing");
+      })
+      })
 
-  });
-
-   var keys = document.querySelectorAll('.key');
-   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-
-   function removeTransition()
-   {
-    this.classList.remove("playing");
-   }
-
-  // function key_pressed(event){
-  //   var key = document.querySelector(`div[data-key = "${event.keyCode}"]`);
-  //   console.log(key)
-  //   key.classList.add("playing")
-  //   setTimeout((key) => {
-  //    key.classList.remove("playing");
-  //   },70);
-  // };
+  document.addEventListener("keyup", event =>
+  {
+    var audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+    if(!audio)
+    return;
+    console.log(audio);
+      Keys.forEach(key=>{
+      if(key.dataset.key ==event.keyCode)
+      {
+        key.classList.add("playing");
+        
+      }
+      })
+      audio.currentTime = 0;
+      audio.play();
+  })
 
 </script>
 
