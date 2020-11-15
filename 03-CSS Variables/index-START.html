@@ -26,6 +26,21 @@
       misc styles, nothing to do with CSS variables
     */
 
+    :root{
+      --spacing: 10px;
+      --blur: 10px;
+      --base: #ffc600;
+    }
+
+    img {
+      filter: blur(var(--blur));
+      background: var(--base);
+      padding: var(--spacing);
+    }
+
+    .hl{
+      color: var(--base);
+    }
     body {
       text-align: center;
       background: #193549;
@@ -45,6 +60,29 @@
   </style>
 
   <script>
+    
+    //  document.addEventListener('input', Update);
+    //    var root = document.querySelector(':root');
+
+    //  function Update(){
+    //    // var rs = getComputedStyle(root);
+    //    //console.log(rs.getPropertyValue('--blur'));
+    //    document.documentElement.style.setProperty('--spacing', document.querySelector('#spacing').value+'px');
+    //    document.documentElement.syle.setProperty('--blur', document.querySelector('#blur').value+'px');
+    //    document.documentElement.syle.setProperty('--color', document.querySelector('#base').value);
+    //  }
+
+const inputs = document.querySelectorAll('.controls input');
+
+inputs.forEach(input => {
+  input.addEventListener('change', inputHandler);
+  input.addEventListener('mousemove', inputHandler);
+});
+
+function inputHandler(){
+  const suffix = this.dataset.sizing || "";
+  document.documentElement.style.setProperty(`--${this.name}`, this.value+suffix);
+}
   </script>
 
 </body>
