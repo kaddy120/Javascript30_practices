@@ -37,24 +37,54 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const born_1500 = inventors.filter(p => {
+      return p.year > 1500 && p.year < 1600;
+    });
+    console.log(born_1500);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const invertorsNames = inventors.map(p => {
+      let rObj = {}
+      rObj[p.first] = p.first;
+      rObj[p.last] = p.last;
+      return rObj;
+    })
 
+    console.log(invertorsNames);
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const orderByAge = inventors.sort((a,b)=> a.year - b.year);
+    console.table(orderByAge);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    let reducer = (accumulator, currentValue)=> 
+    accumulator+(currentValue.passed-currentValue.year);
+    var totalYearsLived = inventors.reduce(reducer, 0);
+    console.log(totalYearsLived);
 
     // 5. Sort the inventors by years lived
-
+    const orderByYearsLived = inventors.sort((a,b)=>
+     (a.passed-a.year) - (b.passed-b.year));
+    console.log(orderByYearsLived);
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    //let response = fetch("https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris");
+    //  var category = document.querySelector('.mw-category');
+    // var links = Array.from(category.querySelectorAll('a'));
+    // var de = links
+    //             .map(link => link.textContent)
+    //             .filter(streetName => streetName.includes('de'));
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const orderByLastName = people.sort((a,b) =>{
+      
+      if(a.split(', ')[1]<b.split(', ')[1])
+      return -1;
+      });
+    console.log(orderByLastName);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
