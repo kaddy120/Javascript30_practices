@@ -113,15 +113,14 @@
   var end = arrayInputs.length -1;
   arrayInputs.forEach(input=>{
     input.addEventListener('click', function(e){
-      if (e.shiftKey) {
+      if (e.shiftKey && this.checked) {
         let index = arrayInputs.indexOf(this);
         if(index< end)
           checkInbetween(index, end);
           else
           checkInbetween(end, index);
-
       }
-      else
+      else if(this.checked)
       {
         end = arrayInputs.indexOf(this);
       }
