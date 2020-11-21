@@ -96,6 +96,39 @@
   </div>
 
 <script>
+  var inputs = document.querySelectorAll('input');
+  var arrayInputs = Array.from(inputs);
+  console.log(inputs);
+  function inbetween(){
+
+  }
+
+  function checkInbetween(start, end)
+  {
+    for(var i = start; i<=end;i++)
+    {
+      inputs[i].checked = true;
+    }
+  }
+  var end = arrayInputs.length -1;
+  arrayInputs.forEach(input=>{
+    input.addEventListener('click', function(e){
+      if (e.shiftKey) {
+        let index = arrayInputs.indexOf(this);
+        if(index< end)
+          checkInbetween(index, end);
+          else
+          checkInbetween(end, index);
+
+      }
+      else
+      {
+        end = arrayInputs.indexOf(this);
+      }
+      
+    })
+  })
+
 </script>
 </body>
 </html>
