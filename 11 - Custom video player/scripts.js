@@ -6,7 +6,7 @@ const playbackRate = document.querySelector('input[name="playbackRate"]');
 const volume = document.querySelector('input[name="volume"]');
 const rwd = document.querySelector('button[data-skip="-10"]');
 const fwd = document.querySelector('button[data-skip="25"]');
-
+var progressBar = document.querySelector('.progress__filled');
 
 media.removeAttribute('controls');
 controls.style.visibility = 'visible'
@@ -19,6 +19,7 @@ playbackRate.addEventListener('mousemove', playSpeed);
 media.addEventListener('ended', stopMedia);
 rwd.addEventListener('click', windBackward);
 fwd.addEventListener('click', windForward);
+media.addEventListener('timeupdate', handleProgress);
 
 function playPauseMedia() {
     if(media.paused) {
@@ -27,20 +28,27 @@ function playPauseMedia() {
       media.play();
     } else {
       //play.setAttribute('data-icon','P');
-      play.innerHTML = '&#x23f8';
+      play.innerHTML = '❚ ❚';
       media.pause();
     }
   }
+
+  function handleProgress() {
+    const percent = (media.currentTime / media.duration) * 100; 
+    progressBar.style.flexBasis = `${percent}%`;
+}
 
   function playSpeed()
   {
     media.playbackRate = this.value;
     //vid.play();
   }
+
   function changeVolume()
   {
     media.volume = this.value;
   }
+
   function stopMedia() {
     media.pause();
     media.currentTime = 0;
@@ -63,4 +71,6 @@ function windBackward() {
       media.currentTime += 10;
     }
   }
+
+  
 
